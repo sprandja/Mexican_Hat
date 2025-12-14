@@ -3,10 +3,10 @@
 #include <stdio.h>
 #include "lu6_a.h"
 
-// --- Configuration ---
+
 #define GRID_SIZE 30 // Density of the control point grid
 
-// --- Global Variables ---
+
 GLUnurbsObj* theNurb;
 float rotateY = 0.0f;
 float rotateX = 20.0f;
@@ -64,12 +64,10 @@ void init() {
     // 1. Background: White
     glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 
-    // 2. CRITICAL FIX: Enable Two-Sided Lighting
-    // Without this, the "inside" or "bottom" of the sombrero will be pitch black.
+    // Two-Sided Lighting
     glLightModeli(GL_LIGHT_MODEL_TWO_SIDE, GL_TRUE);
 
-    // 3. CRITICAL FIX: Boost Ambient Light
-    // This ensures even the darkest shadows are visible (grey, not black).
+    // Ambient Light
     GLfloat global_ambient[] = { 0.5f, 0.5f, 0.5f, 1.0f };
     glLightModelfv(GL_LIGHT_MODEL_AMBIENT, global_ambient);
 
@@ -77,7 +75,7 @@ void init() {
     glEnable(GL_AUTO_NORMAL);
     glEnable(GL_NORMALIZE);
 
-    // --- Material Settings (Orange/Gold) ---
+    // --- Material Settings (Orange/Gold) --- CHANGE MATERIAL COLOR
     GLfloat mat_diffuse[] = { 1.0f, 0.6f, 0.0f, 1.0f };
     GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
     GLfloat mat_shininess[] = { 100.0f };
@@ -87,7 +85,6 @@ void init() {
     glMaterialfv(GL_FRONT_AND_BACK, GL_SHININESS, mat_shininess);
 
     // --- Light Source Settings ---
-    // FIX: Move light to (0, 20, 20) -> High up and in front of the object
     GLfloat light_position[] = { 0.0f, 20.0f, 20.0f, 1.0f };
     GLfloat white_light[] = { 1.0f, 1.0f, 1.0f, 1.0f };
 
@@ -112,7 +109,7 @@ void display() {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glLoadIdentity();
 
-    // Camera Position
+    // CHANGE CAMERA POSITION
     gluLookAt(0.0, 5.0, 10.0,  // Eye
         0.0, 0.0, 0.0,   // Center
         0.0, 1.0, 0.0);  // Up
